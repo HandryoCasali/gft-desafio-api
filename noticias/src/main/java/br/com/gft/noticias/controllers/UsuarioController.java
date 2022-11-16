@@ -1,5 +1,6 @@
 package br.com.gft.noticias.controllers;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -35,16 +36,24 @@ public class UsuarioController {
 
 
     @GetMapping
+    @RolesAllowed("ROLE_ADMIN")
     public Page<UsuarioDTO> listarUsuariosCadastrados(Pageable pageable){
         return usuarioService.listar(pageable).map(UsuarioMapper::toUsuarioDTO);
     }
 
     @GetMapping("{id}")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<DetalhesUsuarioDTO> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(UsuarioMapper.toDetalhesUsuario(usuarioService.buscarUsuarioPorId(id)));
     }
 
+    @GetMapping("detalhes")
+    public ResponseEntity<DetalhesUsuarioDTO> buscarUsuarioLogado(@AuthenticationPrincipal Usuario usuario){
+        return ResponseEntity.ok(UsuarioMapper.toDetalhesUsuario(usuarioService.buscarUsuarioPorId(usuario.getId())));
+    }
+
     @PostMapping
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody @Valid UsuarioForm form){
         return ResponseEntity.ok(UsuarioMapper.toUsuarioDTO(usuarioService.cadastrar(form)));
     }

@@ -69,6 +69,7 @@ public class UsuarioService implements UserDetailsService {
     
     @Transactional
     public void atualizarSenha(Usuario usuario, UsuarioAtualizacao form){
+        System.out.println(usuario.getId());
         usuario.setSenha(new BCryptPasswordEncoder().encode(form.novaSenha()));
         usuarioRepository.save(usuario);
     }
