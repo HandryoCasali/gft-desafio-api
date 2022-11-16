@@ -1,5 +1,6 @@
 package br.com.gft.noticias.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -18,8 +20,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "usuarios")
 public class Usuario implements UserDetails {
@@ -38,10 +42,20 @@ public class Usuario implements UserDetails {
 
     @ManyToMany
     @JoinTable(name = "usuarios_etiquetas")
-    private List<Etiqueta> etiquetas;
+    private List<Etiqueta> etiquetas = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Perfil perfil;
+
+
+    public Usuario(String nome, String email, String senha, Perfil perfil){
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.perfil = perfil;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

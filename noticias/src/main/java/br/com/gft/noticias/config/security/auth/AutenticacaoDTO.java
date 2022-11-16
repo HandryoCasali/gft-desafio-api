@@ -1,19 +1,7 @@
 package br.com.gft.noticias.config.security.auth;
 
-public class AutenticacaoDTO {
-    private String email;
-    private String senha;
+import javax.validation.constraints.NotBlank;
 
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+public record AutenticacaoDTO(@NotBlank String email, @NotBlank String senha){
+
 }

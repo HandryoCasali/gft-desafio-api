@@ -38,7 +38,7 @@ public class TokenService {
     public TokenDTO autenticar(AutenticacaoDTO authForm) throws AuthenticationException {
 
         Authentication authenticate = authManager
-                .authenticate(new UsernamePasswordAuthenticationToken(authForm.getEmail(), authForm.getSenha()));
+                .authenticate(new UsernamePasswordAuthenticationToken(authForm.email(), authForm.senha()));
         String token = gerarToken(authenticate);
 
         return new TokenDTO(token);

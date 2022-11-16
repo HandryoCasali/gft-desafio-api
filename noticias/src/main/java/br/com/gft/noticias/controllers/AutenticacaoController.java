@@ -1,5 +1,7 @@
 package br.com.gft.noticias.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -25,7 +27,7 @@ public class AutenticacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<TokenDTO> autenticar(@RequestBody AutenticacaoDTO authForm) {
+    public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid AutenticacaoDTO authForm) {
         try {
             return ResponseEntity.ok(autenticacaoService.autenticar(authForm));
         } catch (AuthenticationException ae) {
