@@ -40,18 +40,16 @@ public class UsuarioController {
         this.historicoService = historicoService;
     }
 
-    
     @GetMapping
     @RolesAllowed("ADMIN")
     public Page<UsuarioDTO> listarUsuariosCadastrados(Pageable pageable) {
         return usuarioService.listar(pageable).map(UsuarioMapper::toUsuarioDTO);
     }
 
-
     @GetMapping("historico")
     @RolesAllowed("USER")
     public Page<HistoricoDTO> historicoUsuario(@AuthenticationPrincipal Usuario usuario,
-            @PageableDefault(sort = "idDataAcesso", direction = Direction.DESC) Pageable pageable) {
+                        @PageableDefault(sort = "idDataAcesso", direction = Direction.DESC) Pageable pageable) {
         return historicoService.historicoEtiquetaDoUsuario(usuario.getId(), pageable).map(HistoricoDTO::new);
     }
 

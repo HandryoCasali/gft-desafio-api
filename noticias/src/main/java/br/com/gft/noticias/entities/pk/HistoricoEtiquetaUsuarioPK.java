@@ -10,10 +10,12 @@ import javax.persistence.ManyToOne;
 import br.com.gft.noticias.entities.Etiqueta;
 import br.com.gft.noticias.entities.Usuario;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Embeddable
 public class HistoricoEtiquetaUsuarioPK implements Serializable {
 
@@ -25,4 +27,9 @@ public class HistoricoEtiquetaUsuarioPK implements Serializable {
 
     @Column(name = "data_acesso")
     private LocalDateTime dataAcesso = LocalDateTime.now();
+
+    public HistoricoEtiquetaUsuarioPK(Usuario usuario, Etiqueta etiqueta) {
+        this.usuario = usuario;
+        this.etiqueta = etiqueta;
+    }
 }

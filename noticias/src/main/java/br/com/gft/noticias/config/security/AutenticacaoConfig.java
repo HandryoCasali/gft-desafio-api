@@ -17,12 +17,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import br.com.gft.noticias.filters.FiltroAutenticacao;
 import br.com.gft.noticias.services.TokenService;
 import br.com.gft.noticias.services.UsuarioService;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
-@EnableSwagger2
 public class AutenticacaoConfig {
     
     private final TokenService autenticacaoService;
