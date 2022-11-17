@@ -41,7 +41,9 @@ public class Usuario implements UserDetails {
     private String senha;
 
     @ManyToMany
-    @JoinTable(name = "usuarios_etiquetas")
+    @JoinTable(name = "usuarios_etiquetas",
+    joinColumns = @JoinColumn(name="etiqueta_id"),
+    inverseJoinColumns = @JoinColumn(name="usuario_id"))
     private List<Etiqueta> etiquetas = new ArrayList<>();
 
     @ManyToOne

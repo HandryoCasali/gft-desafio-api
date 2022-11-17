@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+
 public record UsuarioForm(
         @NotBlank 
         String nome,
@@ -15,7 +17,7 @@ public record UsuarioForm(
         @NotBlank @Size(min = 8, max = 15)
         String senha,
 
-        @NotBlank 
-        String perfil) {
+        @NotNull
+        String perfil){
 
 }
