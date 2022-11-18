@@ -20,7 +20,7 @@ import br.com.gft.noticias.services.UsuarioService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
+@EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class AutenticacaoConfig {
     
     private final TokenService autenticacaoService;

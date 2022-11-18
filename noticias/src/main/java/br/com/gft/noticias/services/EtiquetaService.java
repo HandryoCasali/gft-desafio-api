@@ -56,4 +56,11 @@ public class EtiquetaService {
         usuario = usuarioRepository.findById(usuario.getId()).get();
         usuario.getEtiquetas().remove(etiqueta);
     }
+
+    @Transactional
+    public void atualizarAcessoEtiqueta(Etiqueta etiqueta){
+        System.out.println(etiqueta.getQntPesquisa());
+        etiqueta.setQntPesquisa(etiqueta.getQntPesquisa() + 1);
+        System.out.println(etiqueta.getQntPesquisa());
+    }
 }
