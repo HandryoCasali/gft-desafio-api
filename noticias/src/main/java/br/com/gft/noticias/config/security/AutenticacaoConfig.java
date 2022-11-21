@@ -55,6 +55,7 @@ public class AutenticacaoConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder.encode("admin123"));
         return passwordEncoder;
     }
 }

@@ -48,7 +48,7 @@ public class ConsumerApiNoticiaService {
         }
 
         List<Noticia> noticias = new ArrayList<>();
-
+        
         consumerNoticiaComEtiquetas(etiquetas, data)
                 .forEach(response -> noticias.addAll(filtrarData(response, dataAtual)));
 
@@ -62,10 +62,11 @@ public class ConsumerApiNoticiaService {
                 .map(e -> this.consumerNoticia(e.getNome().replaceAll(" ", ""), data))
                 .toList();
 
+        
         return Mono.zip(monos, objects -> {
             List<ResponseConsumerNoticia> noticias = new ArrayList<>();
             for (var object : objects) {
-                noticias.add((ResponseConsumerNoticia) object);
+                noticias.add( (ResponseConsumerNoticia) object);
             }
             return noticias;
         }).block();

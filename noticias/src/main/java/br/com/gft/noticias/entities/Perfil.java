@@ -9,10 +9,14 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "perfis")
 public class Perfil implements GrantedAuthority{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

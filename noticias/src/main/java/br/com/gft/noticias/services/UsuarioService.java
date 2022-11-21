@@ -18,6 +18,8 @@ import br.com.gft.noticias.config.exception.EntityNotFoundException;
 import br.com.gft.noticias.dtos.usuario.UsuarioAtualizacao;
 import br.com.gft.noticias.dtos.usuario.UsuarioForm;
 import br.com.gft.noticias.dtos.usuario.UsuarioMapper;
+import br.com.gft.noticias.email.EmailModel;
+import br.com.gft.noticias.email.EmailService;
 import br.com.gft.noticias.entities.Perfil;
 import br.com.gft.noticias.entities.Usuario;
 import br.com.gft.noticias.repositories.PerfilRepository;
@@ -31,6 +33,9 @@ public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private PerfilRepository perfilRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -64,7 +69,13 @@ public class UsuarioService implements UserDetailsService {
                                 .orElseThrow(() -> new EntityNotFoundException("Perfil de acesso inexistente"));
 
         Usuario usuario = UsuarioMapper.toUsuario(form, perfil);
-        return usuarioRepository.save(usuario);
+
+        usuarioRepository.save(usuario);
+        
+        EmailModel email = new EmailModel("handryogft@gmail.com", usuario.getEmail(), usuario.getNome(), "Sua conta no app de notícias foi criada com sucesso!");
+        
+        emailService.enviarEmail(email);
+        return usuario;
     }
     
     @Transactional

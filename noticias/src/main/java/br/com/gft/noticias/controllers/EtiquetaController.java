@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.gft.noticias.dtos.etiqueta.EtiquetaForm;
 import br.com.gft.noticias.dtos.etiqueta.EtiquetaRankDTO;
 import br.com.gft.noticias.entities.Usuario;
@@ -39,7 +38,7 @@ public class EtiquetaController {
     @PostMapping
     @RolesAllowed("USER")
     public ResponseEntity<?> cadastrarEtiqueta( @AuthenticationPrincipal Usuario usuario, @RequestBody EtiquetaForm form){
-        etiquetaService.cadastrarEtiquetaNoUsuarioLogado(usuario, form.nome().trim());
+        etiquetaService.cadastrarEtiquetaNoUsuarioLogado(usuario, form.nome());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

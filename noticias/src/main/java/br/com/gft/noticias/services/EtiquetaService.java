@@ -29,6 +29,7 @@ public class EtiquetaService {
 
     @Transactional
     public Etiqueta cadastrarEtiquetaNoUsuarioLogado(Usuario usuario, String nomeEtiqueta){
+        nomeEtiqueta = nomeEtiqueta.trim().toLowerCase();
         Optional<Etiqueta> opt = etiquetaRepository.findByNome(nomeEtiqueta);
         Etiqueta etiqueta = null;
         if(opt.isPresent()){
