@@ -60,8 +60,6 @@ public class EtiquetaService {
 
     @Transactional
     public void atualizarAcessoEtiqueta(Etiqueta etiqueta){
-        System.out.println(etiqueta.getQntPesquisa());
         etiqueta.setQntPesquisa(etiqueta.getQntPesquisa() + 1);
-        System.out.println(etiqueta.getQntPesquisa());
     }
 }

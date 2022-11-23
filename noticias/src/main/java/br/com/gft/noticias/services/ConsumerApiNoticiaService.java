@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import br.com.gft.noticias.dtos.noticia.ResponseConsumerNoticia;
+import br.com.gft.noticias.email.EmailModel;
+import br.com.gft.noticias.email.EmailService;
 import br.com.gft.noticias.config.exception.EntityNotFoundException;
 import br.com.gft.noticias.dtos.noticia.ListagemNoticiaDTO;
 import br.com.gft.noticias.dtos.noticia.Noticia;
@@ -26,13 +28,15 @@ public class ConsumerApiNoticiaService {
     private final UsuarioRepository usuarioRepository;
     private final HistoricoEtiquetaService historicoService;
     private final EtiquetaService etiquetaService;
+    private final EmailService emailService;
 
     public ConsumerApiNoticiaService(WebClient webClientNoticias, UsuarioRepository usuarioRepository,
-            HistoricoEtiquetaService historicoService, EtiquetaService etiquetaService) {
+            HistoricoEtiquetaService historicoService, EtiquetaService etiquetaService, EmailService emailService) {
         this.webClientNoticias = webClientNoticias;
         this.usuarioRepository = usuarioRepository;
         this.historicoService = historicoService;
         this.etiquetaService = etiquetaService;
+        this.emailService = emailService;
     }
 
     @Transactional
@@ -57,6 +61,19 @@ public class ConsumerApiNoticiaService {
         return new ListagemNoticiaDTO(noticias.size(), noticias);
     }
 
+    public void enviarNoticiasEmailTodosUsuarios(){
+        List<Usuario> usuarios = usuarioRepository.findAllByPerfil_Nome("ROLE_USER");
+        usuarios.forEach(usuario -> {
+            ListagemNoticiaDTO listaNoticia = buscarNoticias(usuario);
+            StringBuilder builder = new StringBuilder();
+            listaNoticia.noticias().forEach(n -> {
+                builder.append("<h2>"+n.getTitle()+"</h2>").append(n.getDescription()+"<br><br>");
+            });
+            
+            emailService.enviarEmail(new EmailModel("handryogft@gmail.com", usuario.getEmail(), usuario.getNome(), builder.toString()));
+        });
+    }
+    
     private List<ResponseConsumerNoticia> consumerNoticiaComEtiquetas(List<Etiqueta> etiquetas, String data) {
         List<Mono<ResponseConsumerNoticia>> monos = etiquetas.stream()
                 .map(e -> this.consumerNoticia(e.getNome().replaceAll(" ", ""), data))

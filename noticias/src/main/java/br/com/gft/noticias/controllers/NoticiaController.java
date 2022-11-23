@@ -25,4 +25,11 @@ public class NoticiaController {
     public ListagemNoticiaDTO buscarNoticias(@AuthenticationPrincipal Usuario usuario){
         return consumerService.buscarNoticias(usuario);
     }
+
+    
+    @GetMapping("email/enviar")
+    @RolesAllowed("ADMIN")
+    public void enviarNoticiasEmailUsuarios() {
+        consumerService.enviarNoticiasEmailTodosUsuarios();
+    }
 }
