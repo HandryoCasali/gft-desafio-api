@@ -26,13 +26,13 @@ public class TokenService {
     @Autowired
     private AuthenticationManager authManager;
 
-    @Value("${loja.jwt.expiration}")
+    @Value("${noticia.jwt.expiration}")
     private String expiration;
 
-    @Value("${loja.jwt.secret}")
+    @Value("${noticia.jwt.secret}")
     private String secret;
 
-    @Value("${loja.jwt.issuer}")
+    @Value("${noticia.jwt.issuer}")
     private String issuer;
 
     public TokenDTO autenticar(AutenticacaoDTO authForm) throws AuthenticationException {
