@@ -28,7 +28,7 @@ public class EtiquetaService {
     }
 
     @Transactional
-    public Etiqueta cadastrarEtiquetaNoUsuarioLogado(Usuario usuario, String nomeEtiqueta){
+    public Etiqueta cadastrarEtiquetaNoUsuario(Usuario usuario, String nomeEtiqueta){
         nomeEtiqueta = nomeEtiqueta.trim().toLowerCase();
         Optional<Etiqueta> opt = etiquetaRepository.findByNome(nomeEtiqueta);
         Etiqueta etiqueta = null;
@@ -49,9 +49,9 @@ public class EtiquetaService {
     }
 
     @Transactional
-    public void deletarEtiquetaNoUsuarioLogado(Usuario usuario, String nomeEtiqueta){
+    public void deletarEtiquetaNoUsuario(Usuario usuario, String nomeEtiqueta){
         if(!etiquetaRepository.existsByNomeAndUsuarios_Email(nomeEtiqueta, usuario.getEmail())){
-            throw new EntityConflictException("Etiqueta já esta cadastrada nesse usuário");
+            throw new EntityConflictException("Etiqueta não esta cadastrada nesse usuário");
         }
         Etiqueta etiqueta = etiquetaRepository.findByNome(nomeEtiqueta).get();
         usuario = usuarioRepository.findById(usuario.getId()).get();

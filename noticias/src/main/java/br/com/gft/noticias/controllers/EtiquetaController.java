@@ -37,15 +37,15 @@ public class EtiquetaController {
 
     @PostMapping
     @RolesAllowed("USER")
-    public ResponseEntity<?> cadastrarEtiqueta( @AuthenticationPrincipal Usuario usuario, @RequestBody EtiquetaForm form){
-        etiquetaService.cadastrarEtiquetaNoUsuarioLogado(usuario, form.nome());
+    public ResponseEntity<?> cadastrarEtiquetaNoUsuarioLogado( @AuthenticationPrincipal Usuario usuario, @RequestBody EtiquetaForm form){
+        etiquetaService.cadastrarEtiquetaNoUsuario(usuario, form.nome());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping
     @RolesAllowed("USER")
-    public void deletarEtiqueta( @AuthenticationPrincipal Usuario usuario, @RequestBody EtiquetaForm form){
-       etiquetaService.deletarEtiquetaNoUsuarioLogado(usuario, form.nome().trim());
+    public void deletarEtiquetaNoUsuarioLogado( @AuthenticationPrincipal Usuario usuario, @RequestBody EtiquetaForm form){
+       etiquetaService.deletarEtiquetaNoUsuario(usuario, form.nome().trim());
     }
     
 }

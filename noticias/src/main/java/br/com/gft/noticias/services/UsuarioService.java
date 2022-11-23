@@ -47,13 +47,11 @@ public class UsuarioService implements UserDetailsService {
 
     public Usuario buscarUsuarioPorId(Long idUsuario) {
 		Optional<Usuario> optional = usuarioRepository.findById(idUsuario);
-		
 		if(optional.isEmpty()) {
 			throw new EntityNotFoundException("Usuário não encontrado");
 		}
 		
 		return optional.get();
-		
 	}
 
     public Page<Usuario> listar(Pageable pageable) {
@@ -80,7 +78,6 @@ public class UsuarioService implements UserDetailsService {
     
     @Transactional
     public void atualizarSenha(Usuario usuario, UsuarioAtualizacao form){
-        System.out.println(usuario.getId());
         usuario.setSenha(new BCryptPasswordEncoder().encode(form.novaSenha()));
         usuarioRepository.save(usuario);
     }

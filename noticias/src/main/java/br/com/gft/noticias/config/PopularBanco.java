@@ -32,10 +32,10 @@ public class PopularBanco implements ApplicationRunner{
 
         Usuario usuario = usuarioService.cadastrar(new UsuarioForm("User", "user@gft.com", "user123", "ROLE_USER"));
 
-        etiquetaService.cadastrarEtiquetaNoUsuarioLogado(usuario, "games");
-        etiquetaService.cadastrarEtiquetaNoUsuarioLogado(usuario, "esportes");
-        etiquetaService.cadastrarEtiquetaNoUsuarioLogado(usuario, "politica");
-        etiquetaService.cadastrarEtiquetaNoUsuarioLogado(usuario, "copa 2022");
+        etiquetaService.cadastrarEtiquetaNoUsuario(usuario, "games");
+        etiquetaService.cadastrarEtiquetaNoUsuario(usuario, "esportes");
+        etiquetaService.cadastrarEtiquetaNoUsuario(usuario, "politica");
+        etiquetaService.cadastrarEtiquetaNoUsuario(usuario, "copa 2022");
         
         consumerService.buscarNoticias(usuario);
     }
