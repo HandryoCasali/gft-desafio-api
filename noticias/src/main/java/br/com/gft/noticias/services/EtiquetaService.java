@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.gft.noticias.config.exception.EntityConflictException;
+import br.com.gft.noticias.config.exception.EntityNotFoundException;
 import br.com.gft.noticias.entities.Etiqueta;
 import br.com.gft.noticias.entities.Usuario;
 import br.com.gft.noticias.repositories.EtiquetaRepository;
@@ -51,7 +52,7 @@ public class EtiquetaService {
     @Transactional
     public void deletarEtiquetaNoUsuario(Usuario usuario, String nomeEtiqueta){
         if(!etiquetaRepository.existsByNomeAndUsuarios_Email(nomeEtiqueta, usuario.getEmail())){
-            throw new EntityConflictException("Etiqueta não esta cadastrada nesse usuário");
+            throw new EntityNotFoundException("Etiqueta não esta cadastrada nesse usuário");
         }
         Etiqueta etiqueta = etiquetaRepository.findByNome(nomeEtiqueta).get();
         usuario = usuarioRepository.findById(usuario.getId()).get();
