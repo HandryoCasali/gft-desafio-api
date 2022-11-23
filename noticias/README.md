@@ -40,18 +40,19 @@
 
 ## 🎁 ***Exceeds***
 
-- [x] Autenticação com jwt 
-- [x] Swagger
-- [x] Projeto no insomnia
-- [x] Requisições simultaneas no consumo da api de noticias
-- [x] Filtrar data das noticias
-- [x] Usuario atualizar a própria senha
-- [x] Usuario desinscrever em alguma etiqueta
-- [x] Envio de email para usuário no ato do cadastro
-- [x] Endpoint envio de email com noticias da data corrente para usuarios (somente adm)
-- [/] Testes unitários - Alguns testes apenas
+- [x] Autenticação com jwt;
+- [x] Swagger;
+- [x] Projeto no insomnia;
+- [x] Requisições simultaneas no consumo da api de noticias;
+- [x] Filtrar data das noticias;
+- [x] Usuario atualizar a própria senha;
+- [x] Usuario desinscrever em alguma etiqueta;
+- [x] Envio de email para usuário no ato do cadastro;
+- [x] Endpoint envio de email com noticias da data corrente para usuarios (somente adm);
+- [/] Testes unitários - Alguns testes apenas;
 
 ---
 ## 🔧 ***Futuras Melhorias***
 
 - [ ] Endpoint para pesquisar uma unica etiqueta mesmo sem estar inscrito na etiqueta;
+- [ ] Atualizar Email Usuario;
