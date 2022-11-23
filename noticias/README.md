@@ -30,6 +30,7 @@
 ## 🌎 Endpoints
 - Cadastro de adm; 
 - Cadastro de usuario;
+- Endpoint para login;
 - Cadastro de etiqueta (somente o usuario pode cadastrar suas etiquetas);
 - Histórico das etiquetas acessadas (adm via id usuario e o proprio usuario);
 - Ranking das etiquetas mais acessadas (somente o adm pode visualizar);
@@ -51,6 +52,6 @@
 - [/] Testes unitários - Alguns testes apenas
 
 ---
-## ***Melhorias***
+## 🔧 ***Futuras Melhorias***
 
 - [ ] Endpoint para pesquisar uma unica etiqueta mesmo sem estar inscrito na etiqueta;
