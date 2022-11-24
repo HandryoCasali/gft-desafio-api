@@ -48,7 +48,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
                 .getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(fieldError -> fieldError.getField() + " " + fieldError.getDefaultMessage())
+                .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
                 .collect(Collectors.toList());
         ErroDeFormularioDTO errorDetails = new ErroDeFormularioDTO(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errorList);
         return handleExceptionInternal(ex, errorDetails, headers, errorDetails.status(), request);

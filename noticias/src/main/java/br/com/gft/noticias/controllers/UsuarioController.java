@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gft.noticias.dtos.historico.HistoricoDTO;
 import br.com.gft.noticias.dtos.usuario.DetalhesUsuarioDTO;
+import br.com.gft.noticias.dtos.usuario.ListaUsuarioDTO;
 import br.com.gft.noticias.dtos.usuario.UsuarioAtualizacao;
 import br.com.gft.noticias.dtos.usuario.UsuarioDTO;
 import br.com.gft.noticias.dtos.usuario.UsuarioForm;
@@ -42,8 +43,8 @@ public class UsuarioController {
 
     @GetMapping
     @RolesAllowed("ADMIN")
-    public Page<UsuarioDTO> listarUsuariosCadastrados(Pageable pageable) {
-        return usuarioService.listar(pageable).map(UsuarioMapper::toUsuarioDTO);
+    public Page<ListaUsuarioDTO> listarUsuariosCadastrados(Pageable pageable) {
+        return usuarioService.listar(pageable).map(UsuarioMapper::toListaUsuarioDTO);
     }
 
     @GetMapping("historico")
@@ -81,7 +82,7 @@ public class UsuarioController {
         usuarioService.atualizarSenha(usuario, form);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping
     public void excluirUsuario(@AuthenticationPrincipal Usuario usuario) {
         usuarioService.excluir(usuario.getId());
     }

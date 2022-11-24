@@ -28,9 +28,9 @@ public class PopularBanco implements ApplicationRunner{
         perfilRepository.save(new Perfil(null, "ROLE_ADMIN"));
         perfilRepository.save(new Perfil(null, "ROLE_USER"));
 
-        usuarioService.cadastrar(new UsuarioForm("Admin", "adms@email.com", "admin123", "ROLE_ADMIN"));
+        usuarioService.cadastrar(new UsuarioForm("Admin", "adms@email.com", "admin1234", "ROLE_ADMIN"));
         
-        Usuario usuario = usuarioService.cadastrar(new UsuarioForm("User", "user@email.com", "user123", "ROLE_USER"));
+        Usuario usuario = usuarioService.cadastrar(new UsuarioForm("User", "user@email.com", "user1234", "ROLE_USER"));
 
         etiquetaService.cadastrarEtiquetaNoUsuario(usuario, "games");
         etiquetaService.cadastrarEtiquetaNoUsuario(usuario, "esportes");

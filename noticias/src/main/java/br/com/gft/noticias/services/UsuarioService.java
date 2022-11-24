@@ -1,5 +1,6 @@
 package br.com.gft.noticias.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -20,8 +21,10 @@ import br.com.gft.noticias.dtos.usuario.UsuarioForm;
 import br.com.gft.noticias.dtos.usuario.UsuarioMapper;
 import br.com.gft.noticias.email.EmailModel;
 import br.com.gft.noticias.email.EmailService;
+import br.com.gft.noticias.entities.HistoricoEtiquetaUsuario;
 import br.com.gft.noticias.entities.Perfil;
 import br.com.gft.noticias.entities.Usuario;
+import br.com.gft.noticias.repositories.HistoricoEtiquetaRepository;
 import br.com.gft.noticias.repositories.PerfilRepository;
 import br.com.gft.noticias.repositories.UsuarioRepository;
 
@@ -36,6 +39,9 @@ public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private HistoricoEtiquetaRepository historicoRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -87,6 +93,10 @@ public class UsuarioService implements UserDetailsService {
         if(!usuarioRepository.existsById(id)){
             throw new EntityNotFoundException("Usuário não encontrado");
         }
+        
+        List<HistoricoEtiquetaUsuario> historicos =  historicoRepository.findAllById_Usuario_Id(id);
+        historicoRepository.deleteAll(historicos);
+
         usuarioRepository.deleteById(id);
     }
 }

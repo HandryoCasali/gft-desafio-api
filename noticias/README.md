@@ -26,16 +26,42 @@
 - Sistema já está previamente populado de exemplos.
 ---
 
-
 ## 🌎 Endpoints
-- Cadastro de adm; 
-- Cadastro de usuario;
-- Endpoint para login;
-- Cadastro de etiqueta (somente o usuario pode cadastrar suas etiquetas);
-- Histórico das etiquetas acessadas (adm via id usuario e o proprio usuario);
-- Ranking das etiquetas mais acessadas (somente o adm pode visualizar);
-- Acesso as noticias (somente usuario);
-- Envio de email com as noticias para todos usuarios;
+
+Usuarios:
+    
+    v1/usuarios
+
+- **Get "/"** Listar usuarios cadastrados (somente adm);
+- **Get "/historico"** Mostrar historico do proprio usuario (somente user);
+- **Get "/historico/{id}"** Mostrar historico de um usuario (somente adm);
+- **Get "/detalhes"** Mostrar detalhes do proprio usuario (somente user);
+- **Get "/detalhes/{id}"** Mostrar detalhes de um usuario (somente adm);
+- **Post "/"** Cadastro de usuario, atributo *"perfil"* especifica a role (somente adm);
+- **Put "/nova-senha"** Atualiza senha do usuario (adm e user);
+- **Delete "/"** Excluir o proprio usuario (adm e user);
+
+Etiquetas:
+
+    v1/etiquetas
+
+- **Get "/"** Ranking etiquetas acessadas (somente adm);
+- **Post "/"** Cadastrar etiqueta no usuario (somente o user);
+- **Delete "/"** "Desinscrever" etiqueta no usuario (somente o usuario);
+
+
+Noticias:
+
+    v1/noticias
+
+- **Get "/"** Buscar noticias do usuario (somente user);
+- **Get "/email/enviar"** Enviar noticias nos emails dos usuarios (somente adm);
+
+Autenticacao:
+
+    v1/auth
+
+- **Post "/"** Autenticar para receber o token jwt (adm e user);
 ---
 
 ## 🎁 ***Exceeds***
@@ -49,6 +75,8 @@
 - [x] Usuario desinscrever em alguma etiqueta;
 - [x] Envio de email para usuário no ato do cadastro;
 - [x] Endpoint envio de email com noticias da data corrente para usuarios (somente adm);
+- [x] Listar usuarios cadastrados (somente adm);
+- [x] Detalhes usuarios (proprio usuario ou adm via id);
 - [/] Testes unitários - Alguns testes apenas;
 
 ---
@@ -56,3 +84,4 @@
 
 - [ ] Endpoint para pesquisar uma unica etiqueta mesmo sem estar inscrito na etiqueta;
 - [ ] Atualizar Email Usuario;
+- [ ] Usuario decidir se quer receber email com noticias;

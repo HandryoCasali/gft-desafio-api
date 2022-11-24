@@ -53,9 +53,13 @@ public class ConsumerApiNoticiaService {
 
         List<Noticia> noticias = new ArrayList<>();
         
-        consumerNoticiaComEtiquetas(etiquetas, data)
-                .forEach(response -> noticias.addAll(filtrarData(response, dataAtual)));
+        List<ResponseConsumerNoticia> consumerNoticiaComEtiquetas = consumerNoticiaComEtiquetas(etiquetas, data);
 
+        Long inicio = System.currentTimeMillis();
+        consumerNoticiaComEtiquetas.forEach(response -> noticias.addAll(filtrarData(response, dataAtual)));
+        Long fim = System.currentTimeMillis(); 
+        System.out.println("Levou " + (fim - inicio) + "ms para filtrar as datas"); 
+             
         atualizarHistoricoAcessoUsuarioERankDeEtiquetas(usuario);
 
         return new ListagemNoticiaDTO(noticias.size(), noticias);
@@ -79,7 +83,6 @@ public class ConsumerApiNoticiaService {
                 .map(e -> this.consumerNoticia(e.getNome().replaceAll(" ", ""), data))
                 .toList();
 
-        
         return Mono.zip(monos, objects -> {
             List<ResponseConsumerNoticia> noticias = new ArrayList<>();
             for (var object : objects) {

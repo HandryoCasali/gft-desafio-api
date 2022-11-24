@@ -13,6 +13,10 @@ public class UsuarioMapper {
         return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail());
     }
 
+    public static ListaUsuarioDTO toListaUsuarioDTO(Usuario usuario){
+        return new ListaUsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getPerfil().getNome());
+    }
+
     public static DetalhesUsuarioDTO toDetalhesUsuario(Usuario usuario) {
         return new DetalhesUsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getPerfil().getNome().toString(), usuario.getEtiquetas().stream().map(EtiquetaMapper::toEtiquetaDTO).toList());
     }
@@ -21,5 +25,7 @@ public class UsuarioMapper {
     public static Usuario toUsuario(UsuarioForm form, Perfil perfil) {
         return new Usuario(form.nome(), form.email(), new BCryptPasswordEncoder().encode(form.senha()), perfil);
     };
+
+
     
 }

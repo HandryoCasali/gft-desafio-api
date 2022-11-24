@@ -26,6 +26,7 @@ import br.com.gft.noticias.dtos.usuario.UsuarioForm;
 import br.com.gft.noticias.email.EmailService;
 import br.com.gft.noticias.entities.Perfil;
 import br.com.gft.noticias.entities.Usuario;
+import br.com.gft.noticias.repositories.HistoricoEtiquetaRepository;
 import br.com.gft.noticias.repositories.PerfilRepository;
 import br.com.gft.noticias.repositories.UsuarioRepository;
 
@@ -37,6 +38,7 @@ public class UsuarioServiceTest {
     @MockBean private UsuarioRepository usuarioRepository;
     @MockBean private PerfilRepository perfilRepository;
     @MockBean private EmailService emailService;
+    @MockBean private HistoricoEtiquetaRepository historicoRepository;
 
     public static Usuario usuario;
 
@@ -98,6 +100,16 @@ public class UsuarioServiceTest {
         when(usuarioRepository.existsById(2L)).thenReturn(false);
 
         assertThrows(EntityNotFoundException.class, () -> usuarioService.excluir(2L));
+    }
+
+    @Test
+    public void deveDeletarUsuario(){
+        when(usuarioRepository.existsById(2L)).thenReturn(true);
+        usuarioService.excluir(2L);
+        assertAll(
+            () -> verify(usuarioRepository).deleteById(2L),
+            () -> verify(historicoRepository).deleteAll(any())
+        );
     }
 
 }
